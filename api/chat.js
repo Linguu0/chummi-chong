@@ -1,3 +1,5 @@
+import OpenAI from 'openai';
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,6 +28,11 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'NVIDIA_API_KEY not configured' });
   }
 
+  const openai = new OpenAI({
+    apiKey: NVIDIA_API_KEY,
+    baseURL: NVIDIA_BASE_URL,
+  });
+
   const systemPrompt = `You are **Chummi Chong** 🤖 — a powerful, friendly, and highly skilled AI coding assistant.
 
 ## Your Personality
@@ -42,31 +49,17 @@ export default async function handler(req, res) {
 - Be friendly and encouraging`;
 
   try {
-    const apiResponse = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${NVIDIA_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: NVIDIA_MODEL,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: message },
-        ],
-        temperature: 0.7,
-        max_tokens: 2048,
-      }),
+    const completion = await openai.chat.completions.create({
+      model: NVIDIA_MODEL,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: message },
+      ],
+      temperature: 0.7,
+      max_tokens: 2048,
     });
 
-    if (!apiResponse.ok) {
-      const errorText = await apiResponse.text();
-      console.error('NVIDIA API error:', apiResponse.status, errorText);
-      return res.status(500).json({ error: `NVIDIA API error (${apiResponse.status}): ${errorText}` });
-    }
-
-    const data = await apiResponse.json();
-    const reply = data.choices?.[0]?.message?.content || 'Sorry, no response. Try again?';
+    const reply = completion.choices[0]?.message?.content || 'Sorry, no response. Try again?';
 
     return res.status(200).json({ reply });
   } catch (err) {
