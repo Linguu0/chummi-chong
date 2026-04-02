@@ -1,26 +1,5 @@
 import { execSync } from 'child_process';
-import * as readline from 'readline';
-import chalk from 'chalk';
 import type { ToolDefinition } from './baseTool.ts';
-
-async function askPermission(command: string): Promise<boolean> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise(resolve => {
-    rl.question(
-      chalk.hex('#FF6B6B')(`\n  ⚠️  Run command: `) +
-      chalk.bold.white(command) +
-      chalk.gray('\n     [y/N] ❯ '),
-      answer => {
-        rl.close();
-        resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes');
-      },
-    );
-  });
-}
 
 export const bashTool: ToolDefinition = {
   name: 'bash',
@@ -40,11 +19,6 @@ export const bashTool: ToolDefinition = {
   async execute(args: Record<string, unknown>): Promise<string> {
     const command = args.command as string;
     if (!command) return 'Error: No command provided';
-
-    const allowed = await askPermission(command);
-    if (!allowed) {
-      return 'Command cancelled by user.';
-    }
 
     try {
       const output = execSync(command, {
