@@ -1,11 +1,11 @@
 {
-  "name": "chummi-chong",
+  "name": "simp-chong",
   "version": "1.0.0",
-  "description": "Chummi Chong — Your AI Coding Assistant CLI 🤖",
+  "description": "Simp Chong — Your AI Coding Assistant CLI 💌 ",
   "type": "module",
   "main": "src/index.ts",
   "bin": {
-    "chummi": "src/index.ts"
+    "simp": "src/index.ts"
   },
   "scripts": {
     "start": "npx tsx src/index.ts",

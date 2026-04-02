@@ -94,7 +94,7 @@ export const App: React.FC<{ engine: LLMEngine }> = ({ engine }) => {
 
       {status && !permissionRequest && (
         <Box marginTop={1}>
-          <Text color="cyan">
+          <Text color="#FF0a54">
             {/* @ts-ignore */}
             <Spinner type="dots" /> {status}
           </Text>
@@ -103,8 +103,7 @@ export const App: React.FC<{ engine: LLMEngine }> = ({ engine }) => {
 
       {!permissionRequest && (
         <Box marginTop={1}>
-          <Text bold color="#4ECDC4">
-            🤖 chummi ❯{' '}
+          <Text bold color="#FF0a54">💖 simp ❯{' '}
           </Text>
           <TextInput
             value={input}
