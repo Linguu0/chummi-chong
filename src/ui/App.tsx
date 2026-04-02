@@ -95,6 +95,7 @@ export const App: React.FC<{ engine: LLMEngine }> = ({ engine }) => {
       {status && !permissionRequest && (
         <Box marginTop={1}>
           <Text color="cyan">
+            {/* @ts-ignore */}
             <Spinner type="dots" /> {status}
           </Text>
         </Box>
