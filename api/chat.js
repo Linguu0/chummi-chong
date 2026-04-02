@@ -1,5 +1,3 @@
-import OpenAI from 'openai';
-
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,13 +23,9 @@ export default async function handler(req, res) {
   const NVIDIA_MODEL = process.env.NVIDIA_MODEL || 'meta/llama-3.1-70b-instruct';
 
   if (!NVIDIA_API_KEY) {
+    console.error('NVIDIA_API_KEY not configured');
     return res.status(500).json({ error: 'NVIDIA_API_KEY not configured' });
   }
-
-  const openai = new OpenAI({
-    apiKey: NVIDIA_API_KEY,
-    baseURL: NVIDIA_BASE_URL,
-  });
 
   const systemPrompt = `You are **Chummi Chong** 🤖 — a powerful, friendly, and highly skilled AI coding assistant.
 
@@ -49,21 +43,48 @@ export default async function handler(req, res) {
 - Be friendly and encouraging`;
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: NVIDIA_MODEL,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: message },
-      ],
-      temperature: 0.7,
-      max_tokens: 2048,
+    console.log('Chummi: Connecting to NVIDIA Build API...');
+    
+    // Using fetch with an AbortController for a custom timeout if NVIDIA is slow
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 45000); // 45s timeout
+
+    const apiResponse = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${NVIDIA_API_KEY}`,
+      },
+      signal: controller.signal,
+      body: JSON.stringify({
+        model: NVIDIA_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message },
+        ],
+        temperature: 0.7,
+        max_tokens: 2048,
+      }),
     });
 
-    const reply = completion.choices[0]?.message?.content || 'Sorry, no response. Try again?';
+    clearTimeout(timeoutId);
+
+    if (!apiResponse.ok) {
+      const errorText = await apiResponse.text();
+      console.error('NVIDIA API error response:', apiResponse.status, errorText);
+      return res.status(500).json({ error: `NVIDIA API error (${apiResponse.status}): ${errorText}` });
+    }
+
+    const data = await apiResponse.json();
+    const reply = data.choices?.[0]?.message?.content || 'Sorry, no response. Try again?';
 
     return res.status(200).json({ reply });
   } catch (err) {
-    console.error('Chat error:', err);
+    if (err.name === 'AbortError') {
+      console.error('Chat error: Request timed out');
+      return res.status(504).json({ error: 'NVIDIA API request timed out after 45 seconds.' });
+    }
+    console.error('Chat error stack:', err);
     return res.status(500).json({ error: `Server error: ${err.message}` });
   }
 }
