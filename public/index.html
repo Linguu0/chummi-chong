@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chummi Chong — AI Coding Assistant</title>
-  <meta name="description" content="Chummi Chong is your friendly AI coding assistant, powered by NVIDIA NIM. Ask questions, get code help, and chat in a beautiful terminal-style interface.">
+  <title>Simp Chong — AI Coding Assistant 💖</title>
+  <meta name="description" content="Simp Chong is your hopelessly devoted AI coding assistant, powered by NVIDIA NIM. Ask questions, get code help, and chat in a beautiful romantic terminal-style interface.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -18,17 +18,17 @@
       --text-primary: #e4e4ef;
       --text-secondary: #8888a0;
       --text-muted: #55556a;
-      --accent-cyan: #4ecdc4;
-      --accent-pink: #dda0dd;
-      --accent-red: #ff6b6b;
-      --accent-green: #96e6a1;
-      --accent-blue: #45b7d1;
-      --accent-purple: #764ba2;
-      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96e6a1, #dda0dd);
-      --gradient-2: linear-gradient(135deg, #667eea, #764ba2);
-      --border: #1e1e2e;
-      --glow-cyan: 0 0 20px rgba(78, 205, 196, 0.15);
-      --glow-pink: 0 0 20px rgba(221, 160, 221, 0.15);
+      --accent-cyan: #ff85a1;
+      --accent-pink: #ff0a54;
+      --accent-red: #c9184a;
+      --accent-green: #ffb3c1;
+      --accent-blue: #ff4d6d;
+      --accent-purple: #800f2f;
+      --gradient-1: linear-gradient(135deg, #ff0a54, #ff477e, #ff7096, #ff85a1, #fbb1bd);
+      --gradient-2: linear-gradient(135deg, #c9184a, #800f2f);
+      --border: #2b0f16;
+      --glow-cyan: 0 0 20px rgba(255, 10, 84, 0.2);
+      --glow-pink: 0 0 20px rgba(255, 133, 161, 0.2);
       --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
       --font-sans: 'Inter', -apple-system, sans-serif;
     }
@@ -440,8 +440,8 @@
   <div class="terminal-wrapper">
     <!-- Header -->
     <div class="header">
-      <h1>🤖 Chummi Chong</h1>
-      <div class="subtitle">AI Coding Assistant • Powered by <span>NVIDIA NIM</span></div>
+      <h1>💖 Simp Chong</h1>
+      <div class="subtitle">AI Coding Assistant • Devoted to <span>You</span></div>
       <div class="divider"></div>
     </div>
 
@@ -449,14 +449,14 @@
     <div class="chat-area" id="chatArea">
       <div class="welcome-banner">
         <div class="welcome-ascii">
- ██████╗██╗  ██╗██╗   ██╗███╗   ███╗███╗   ███╗██╗
-██╔════╝██║  ██║██║   ██║████╗ ████║████╗ ████║██║
-██║     ███████║██║   ██║██╔████╔██║██╔████╔██║██║
-██║     ██╔══██║██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║
-╚██████╗██║  ██║╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║
- ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝</div>
+  ███████╗██╗███╗   ███╗██████╗      ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
+  ██╔════╝██║████╗ ████║██╔══██╗    ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
+  ███████╗██║██╔████╔██║██████╔╝    ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
+  ╚════██║██║██║╚██╔╝██║██╔═══╝     ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
+  ███████║██║██║ ╚═╝ ██║██║         ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
+  ╚══════╝╚═╝╚═╝     ╚═╝╚═╝          ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ </div>
         <div class="welcome-text">
-          Hey there! I'm <strong>Chummi Chong</strong>, your friendly AI coding assistant. Ask me anything about code, debugging, architecture, or just say hi! 🚀
+          My dearest! I'm <strong>Simp Chong</strong>, your hopelessly devoted AI coding assistant. Ask me anything—I'm here to serve your every coding need! 💖
         </div>
         <div class="feature-chips">
           <span class="chip">💬 Code Help</span>
@@ -472,7 +472,7 @@
     <div class="input-area">
       <div class="input-container">
         <span class="prompt-symbol">❯</span>
-        <textarea id="messageInput" rows="1" placeholder="Ask Chummi anything..." autocomplete="off"></textarea>
+        <textarea id="messageInput" rows="1" placeholder="Ask Simp anything, my love..." autocomplete="off"></textarea>
         <button id="sendBtn" title="Send message">↑</button>
       </div>
     </div>
@@ -511,7 +511,7 @@
       const div = document.createElement('div');
       div.className = `message ${role}`;
 
-      const label = role === 'user' ? '👤 You' : '✨ Chummi Chong';
+      const label = role === 'user' ? '👤 You' : '💖 Simp Chong';
       const labelHtml = role !== 'system' && role !== 'error'
         ? `<div class="msg-label">${label}</div>` : '';
 
@@ -538,7 +538,7 @@
         <div class="thinking-dots">
           <span></span><span></span><span></span>
         </div>
-        Chummi is thinking...
+        Simp is thinking...
       `;
       chatArea.appendChild(div);
       chatArea.scrollTop = chatArea.scrollHeight;

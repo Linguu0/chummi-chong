@@ -21,7 +21,7 @@ export const PermissionRequest: React.FC<PermissionRequestProps> = ({ tool, args
   return (
     <Box flexDirection="column" borderStyle="double" borderColor="yellow" paddingX={1} marginY={1}>
       <Text bold color="yellow">⚠️  Permission Request</Text>
-      <Text>Chummi wants to run: <Text bold color="cyan">{tool}</Text></Text>
+      <Text>💖 Simp Chong wants to run: <Text bold color="#FF0a54">{tool}</Text></Text>
       <Box marginY={1}>
         <Text color="gray">{args}</Text>
       </Box>

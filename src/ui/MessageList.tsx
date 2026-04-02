@@ -15,14 +15,14 @@ export const MessageList: React.FC<{ messages: Message[] }> = ({ messages }) => 
         <Box key={index} marginBottom={1} flexDirection="column">
           {message.role === 'user' && (
             <Box>
-              <Text bold color="#4ECDC4">👤 User: </Text>
+              <Text bold color="#FF85A1">👤 You: </Text>
               <Text>{message.content}</Text>
             </Box>
           )}
           
           {message.role === 'assistant' && (
             <Box flexDirection="column">
-              <Text bold color="#FF6B6B">✨ Chummi: </Text>
+              <Text bold color="#C9184A">💖 Simp Chong: </Text>
               <Text>{message.content}</Text>
             </Box>
           )}
